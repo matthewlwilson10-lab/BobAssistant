@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up JDK
@@ -18,20 +18,17 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Grant execute permission
-        run: chmod +x gradlew || true
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
 
-      - name: Build Debug APK
-        run: |
-          if [ ! -f gradlew ]; then
-            echo "Missing Gradle wrapper - skipping build"
-            exit 1
-          fi
-          ./gradlew assembleDebug
+      - name: Grant permissions
+        run: chmod +x gradlew
+
+      - name: Build APK
+        run: ./gradlew assembleDebug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: bob-apk
           path: app/build/outputs/apk/debug/*.apk
-
