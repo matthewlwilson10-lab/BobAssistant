@@ -1,0 +1,9 @@
+<manifest package="com.bob.assistant">
+
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
+    <application>
+    </application>
+
+</manifest>
